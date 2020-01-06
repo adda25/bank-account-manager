@@ -11,7 +11,7 @@
           aria-label="Menu"
         />
 
-        <q-toolbar-title>
+        <q-toolbar-title v-on:click="$router.push('/')">
           Account Manager
         </q-toolbar-title>
 
@@ -26,7 +26,7 @@
     >
       <q-list class="sidebar">
         <q-item-label header>App</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
+        <q-item clickable v-on:click="$router.push('accounts')">
           <q-item-section avatar>
             <q-icon name="school" />
           </q-item-section>
@@ -56,7 +56,7 @@
       </q-list>
     </q-drawer>
 
-    <q-page-container class="view">
+    <q-page-container class="view" style="min-height: 100vh">
       <router-view />
     </q-page-container>
   </q-layout>

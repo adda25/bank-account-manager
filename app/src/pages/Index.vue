@@ -5,13 +5,7 @@
 </template>
 
 <script>
-const {ipcRenderer} = require('electron')
-
 export default {
-  name: 'PageIndex',
-  mounted: function () {
-	console.log(ipcRenderer.sendSync('synchronous-message', 'initOnce')) 
-	console.log(ipcRenderer.sendSync('synchronous-message', 'getMvnTypes'))
-  }
+  name: 'PageIndex'
 }
 </script>

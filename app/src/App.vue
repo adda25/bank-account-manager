@@ -5,8 +5,27 @@
 </template>
 
 <script>
+let coms = require('./custom/coms')
+
 export default {
-  name: 'App'
+  name: 'App',
+  methods: {
+  	fetch () {
+  		coms.send('initOnce', null, function (res) {}.bind(this))
+  		coms.send('getMvnTypes', null, function (res) {
+  			this.$store.commit('setMvnType', res)
+  		}.bind(this))
+  		coms.send('getAccountUnits', null, function (res) {
+  			this.$store.commit('setAccountUnits', res)
+  		}.bind(this))
+  		coms.send('getAccountTypes', null, function (res) {
+  			this.$store.commit('setAccountTypes', res)
+  		}.bind(this))
+  	}
+  },
+  mounted () {
+  	this.fetch()
+  }
 }
 </script>
 <style lang="scss">

@@ -1,6 +1,5 @@
-import { app, BrowserWindow } from 'electron'
-const {ipcMain} = require('electron')
-let models = require('./model.js')
+import { app, BrowserWindow, ipcMain } from 'electron'
+import models from './model.js'
 
 /**
  * Set `__statics` path to static files in production;
@@ -52,10 +51,28 @@ app.on('activate', () => {
 /**
 * API
 */
-ipcMain.on('synchronous-message',  function (event, arg) {
-    //event.returnValue = 'ok' 
-    models[arg](function (res) {
-      event.returnValue = res
+////ipcMain.on('synchronous-message',  function (event, arg) {
+////  console.log(event, arg)
+////    //event.returnValue = 'ok' 
+////    models[arg](function (res) {
+////      event.returnValue = res
+////    })
+////})
+ipcMain.handle('amc', async (event, args) => {
+    let arg = args[0]
+    let payload = null
+    if (args.length > 1) {
+      payload = args[1]
+    }
+    console.log(arg)
+    let pro = new Promise((resolve, reject) => {
+      models[arg](payload, function (res) {
+        console.log('res -->', res)
+        resolve(res)
+      })
+    })
+    return await pro.then((mex) => {
+      return mex
     })
 })
 
